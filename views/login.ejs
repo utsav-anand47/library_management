@@ -14,7 +14,7 @@
                         E-Mail
                     </label>
                     <input type="email" name="email" id="name" required />
-                    <p class="auth-error">E-Mail is a required field.</p>
+                    <!-- <p class="auth-error">E-Mail is a required field.</p> -->
                 </div>
                 <div class="auth-input">
                     <label for="password">
@@ -26,7 +26,7 @@
                     <%= message %>
                 </p>
 
-                <div class="type">
+                <!-- <div class="type">
                     <label for="type" id="test">User Type</label><br />
                     <div class="radio" class="type" id="type">
                         <div class="radio-block">
@@ -40,7 +40,7 @@
                         </div>
                     </div>
                     <small id="type-error"></small>
-                </div>
+                </div> -->
                 <button type="submit" class="auth-btn"">Sign in</button>
         </div>
         </form>
@@ -49,11 +49,5 @@
         </div>
     </div>
     </div>
-    <script>
-        function myFunction() {
-            document.getElementById("name").innerHTML = alert("NOW YOU CAN ENTER YOUR NAME AS YOUR USER NAME AND PASSWORD FOR ENTER TO THE WEBSITE");
-        }
-
-    </script>
 
     <%- include('partials/footer') %>

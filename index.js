@@ -1,6 +1,7 @@
 const express = require('express');
 const dbConnect = require('./config/connection');
 const checkAuth = require('./config/checkAuth');
+const checkAdmin = require('./config/checkAdmin');
 const cookieParser = require('cookie-parser');
 
 const app = express();
@@ -19,7 +20,7 @@ dbConnect()
 // Routes
 app.use("/", require('./routes/indexRoute'));
 app.use("/user", checkAuth, require('./routes/userRoute'));
-app.use("/admin", require('./routes/adminRoute'));
+app.use("/admin", checkAdmin, require('./routes/adminRoute'));
 app.get("/*", (req, res) => {
     res.send('404 Not found');
 });

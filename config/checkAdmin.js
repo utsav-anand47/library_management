@@ -7,7 +7,7 @@ module.exports = function (req, res, next) {
 
     try {
         const decoded = jwt.verify(token, 'fhsdgfsggggvgsvg');
-        console.log(decoded);
+        if (decoded.role !== 'admin') return res.render('login', { message: 'You are not an admin' });
         req.user = decoded;
         next();
     } catch (err) {

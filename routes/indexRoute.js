@@ -15,8 +15,8 @@ route.get('/login', (req, res) => {
 
 route.post('/login', async (req, res) => {
     try {
-        const { email, password, type } = req.body;
-        if (!email || !password || !type) {
+        const { email, password } = req.body;
+        if (!email || !password) {
             return res.render('login', { message: "Please fill all fields" });
         }
         const user = await User.findOne({ email });
@@ -29,16 +29,16 @@ route.post('/login', async (req, res) => {
             return res.render('login', { message: "Invalid credentials" });
         }
 
-        const token = jwt.sign({ role: user.role, email: user.email, id: user._id }, 'fhsdgfsggggvgsvg');
+        const token = jwt.sign({ role: user.type, email: user.email, id: user._id }, 'fhsdgfsggggvgsvg');
 
         // Set the token in a cookie (you can also send it in the response body)
         res.cookie('token', token, { httpOnly: true });
         res.cookie('user', user.fname + " " + user.lname);
         res.cookie('role', user.type);
-        if (type === 'admin') {
-            res.redirect('/admin/dashboard');
-        }
-        res.redirect('/user/dashboard');
+        // if (type === 'admin') {
+        //     res.redirect('/admin/dashboard');
+        // }
+        res.redirect('/');
     } catch (error) {
         console.log(error);
         res.render('login', { message: error.message });
@@ -73,6 +73,7 @@ route.post('/signup', async (req, res) => {
 
         res.redirect('/login');
     } catch (error) {
+        console.log(error);
         res.render('signup', { message: error.message });
     }
 });
