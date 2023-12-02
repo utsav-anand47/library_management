@@ -1,17 +1,60 @@
 <%- include('partials/header') %>
 
-    <img class="backgroundImg" src="https://i.stack.imgur.com/gqKFh.png" alt="img">
+
     <div class="borrowerOptions">
         <div class="borrowerCheckout">
-            <a href="./selectBranch.html">
-                <button>Checkout a Book</button>
+            <a href="/user/checkout-books">
+                <button>See cart</button>
             </a>
         </div>
         <div class="borrowerReturn">
-            <a href="./returnBook.html">
-                <button>Return a Book</button>
-            </a>
+            Meet libarian to return your book.
         </div>
     </div>
+
+    <div class="table_container table-responsive" style="padding: 110px 93px;">
+        <h2>Books You have taken</h2>
+
+        <% if (takenBooks.length===0) { %>
+            <p>No Book taken</p>
+            <% } else { %>
+                <table class="table table-hover table-bordered">
+                    <thead>
+                        <tr>
+                            <th scope="col">Book Title</th>
+                            <th scope="col">Author</th>
+                            <th scope="col">Book number</th>
+                            <th scope="col">Borrowed Date</th>
+                            <th scope="col">Returned Date</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+
+                        <% takenBooks.forEach(book=> { %>
+                            <tr>
+                                <td>
+                                    <%= book.bookId.title %>
+                                </td>
+                                <td>
+                                    <%= book.bookId.author %>
+                                </td>
+                                <td>
+                                    <%= book.bookId.bookNumber %>
+                                </td>
+                                <td>
+                                    <%= book.borrowedDate %>
+                                </td>
+                                <td>
+                                    <%= book.returnedDate %>
+                                </td>
+                            </tr>
+                            <% }); %>
+                    </tbody>
+                </table>
+                <% }%>
+
+    </div>
+
 
     <%- include('partials/footer') %>

@@ -1,19 +1,22 @@
 /*****************HOMEPAGE********************/
 
 .navBar {
-  top: 0;
-  height: 75px;  /*need to add extra 75px to top div in all pages*/
+  /* top: 0; */
+  height: 75px;
+  /*need to add extra 75px to top div in all pages*/
   width: 100%;
   background-color: #054b8d;
-  position: fixed;
+  /* position: fixed; */
   display: flex;
-  align-items: center; /*vertical align*/
+  align-items: center;
+  /*vertical align*/
 }
 
 .logo {
   padding-left: 25px;
   flex-grow: 1;
 }
+
 .logo img {
   height: 65px;
   width: 65px;
@@ -23,6 +26,7 @@
 .navButtons {
   padding-right: 25px;
 }
+
 .navButtons button {
   color: white;
   padding: 10px 10px;
@@ -30,13 +34,15 @@
   border: none;
   font-size: 20px;
 }
+
 .navButtons button:hover {
   background: #1c3266;
 }
 
 .backgroundImg {
   position: absolute;
-  z-index: -10;  /*put image behind everything*/
+  z-index: -10;
+  /*put image behind everything*/
   height: 100%;
   width: 100%;
   opacity: 0.5;
@@ -46,10 +52,12 @@
   padding-top: 150px;
   text-align: center;
 }
+
 .welcomeMsg {
   font-size: 40px;
   text-decoration: underline;
 }
+
 .userType {
   margin-top: 80px;
   font-size: 30px;
@@ -66,11 +74,13 @@
 .admin {
   padding: 10px 0px;
 }
+
 .admin button {
   background: rgb(215, 44, 215);
   padding: 15px 20px;
   font-size: 25px;
 }
+
 .admin button:hover {
   background: #5f015f;
 }
@@ -78,11 +88,13 @@
 .librarian {
   padding: 10px 0px;
 }
+
 .librarian button {
   background: orange;
   padding: 15px 20px;
   font-size: 25px;
 }
+
 .librarian button:hover {
   background: #cf8702;
 }
@@ -90,11 +102,13 @@
 .borrower {
   padding: 10px 0px;
 }
+
 .borrower button {
   background: salmon;
   padding: 15px 20px;
   font-size: 25px;
 }
+
 .borrower button:hover {
   background: #d65142;
 }
@@ -109,17 +123,20 @@
 .login_form {
   text-align: center;
 }
+
 .login_form h1 {
   font-size: 40px;
 }
+
 .login_form input {
   margin: 5px 0px;
 }
+
 .login_form button {
   margin: 5px 0px;
   width: 100%;
   padding: 10px;
-  font-size: 18px; 
+  font-size: 18px;
 }
 
 
@@ -135,14 +152,17 @@
   width: 100%;
   text-align: center;
 }
+
 .cancel {
   padding: 8px 40px;
   margin-right: 20px;
   background: #ce0707;
 }
+
 .cancel:hover {
   background: #fc0606;
 }
+
 .update {
   padding: 8px 40px;
 }
@@ -173,20 +193,25 @@
   flex-direction: column;
 }
 
-.borrowerCheckout, .borrowerReturn {
+.borrowerCheckout,
+.borrowerReturn {
   margin: 40px 0px;
 }
 
-.borrowerCheckout button, .borrowerReturn button {
+.borrowerCheckout button,
+.borrowerReturn button {
   padding: 30px 60px;
   font-size: 25px;
   background: salmon;
 }
-.borrowerCheckout button:hover, .borrowerReturn button:hover {
+
+.borrowerCheckout button:hover,
+.borrowerReturn button:hover {
   background: #d65142;
 }
 
-.return, .checkout {
+.return,
+.checkout {
   padding: 8px 40px;
 }
 
@@ -228,6 +253,7 @@
   border-bottom: 1px solid #4b4b4b;
   color: white;
 }
+
 .nav-link:hover {
   background: black;
   color: white;
@@ -282,9 +308,11 @@
   border-radius: 50px;
   font-size: 16px;
 }
+
 .addButton:hover {
   background: #01ac01;
 }
+
 .addButton i {
   font-size: 21px;
   padding-right: 5px;

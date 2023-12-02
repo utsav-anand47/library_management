@@ -7,10 +7,33 @@ route.get('/dashboard', async (req, res) => {
     const userId = req.user.id;
     try {
         const takenBooks = await BorrowHistory.find({ userId: userId }).populate('bookId');
-
+        console.log(takenBooks);
         res.render('dashboard', { takenBooks });
     } catch (error) {
         res.status(404).send(error.message);
+    }
+});
+
+route.post('/addtocart', async (req, res) => {
+    const { bookId } = req.body;
+    const userId = req.user?.id
+
+
+    try {
+        if (!userId || !bookId) {
+            return res.status(400).send("Please provide all data.");
+        }
+
+        // Find the borrowed books and update their status to "borrowed"
+        await BorrowHistory.create({
+            userId,
+            bookId
+        });
+
+        res.redirect('/books');
+    } catch (error) {
+        console.error(error);
+        res.status(500).send("Internal Server Error");
     }
 });
 
@@ -23,21 +46,22 @@ route.get('/checkout-books', async (req, res) => {
     } catch (error) {
         res.status(404).send(error.message);
     }
-    res.render('checkoutBook');
+
 });
 
 route.post('/checkout-books', async (req, res) => {
-    const { borrowIds } = req.body;
+    const { borrowIds, returnDate } = req.body;
 
     try {
-        if (!borrowIds || !Array.isArray(borrowIds)) {
-            return res.status(400).send("Invalid request. Please provide an array of borrowIds.");
+        if (!borrowIds || !returnDate || !Array.isArray(borrowIds)) {
+            return res.status(400).send("Invalid request. Please provide sufficent data.");
         }
-
+        
         // Find the borrowed books and update their status to "borrowed"
+        const typeDate = new Date(returnDate);
         const updatedBorrowHistory = await BorrowHistory.updateMany(
             { _id: { $in: borrowIds }, status: 'cart' }, // Only update if the status is "cart"
-            { status: 'borrowed' },
+            { status: 'borrowed', returnedDate: typeDate, borrowedDate: new Date() },
         );
 
         // Find the details of the borrowed books
@@ -49,37 +73,7 @@ route.post('/checkout-books', async (req, res) => {
             await Book.findByIdAndUpdate(bookId, { $inc: { availableCopies: -1 } });
         }
 
-        res.redirect('/dashboard');
-    } catch (error) {
-        console.error(error);
-        res.status(500).send("Internal Server Error");
-    }
-});
-
-route.post('/return-book', async (req, res) => {
-    const { returnId } = req.body;
-
-    try {
-        if (!returnId) {
-            return res.status(400).send("Invalid request. Please provide an array of returnId.");
-        }
-
-        // Find the borrowed books and update their status to "returned"
-        const updatedBorrowHistory = await BorrowHistory.findOneAndUpdate(
-            { _id: returnId, status: 'borrowed' }, // Only update if the status is "borrowed"
-            { status: 'returned', returnedDate: new Date() },
-        );
-
-        // Find the details of the returned books
-        const returnedBooks = await BorrowHistory.find({ _id: returnId, status: 'returned' });
-
-        // Update the available count of the books
-        for (const returnedBook of returnedBooks) {
-            const bookId = returnedBook.bookId;
-            await Book.findByIdAndUpdate(bookId, { $inc: { availableCopies: 1 } });
-        }
-
-        res.redirect('/dashboard');
+        res.redirect('/user/dashboard');
     } catch (error) {
         console.error(error);
         res.status(500).send("Internal Server Error");

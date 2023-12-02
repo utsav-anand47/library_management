@@ -1,0 +1,49 @@
+<%- include('partials/header') %>
+    <%- include('partials/adminNav') %>
+
+        <div class="table_container table-responsive" style="padding: 110px 93px;">
+            <h2>Books All User have taken</h2>
+
+            <% if (users.length===0) { %>
+                <p>No Users</p>
+                <% } else { %>
+                    <table class="table table-hover table-bordered">
+                        <thead>
+                            <tr>
+                                <th scope="col">full name</th>
+                                <th scope="col">last name</th>
+                                <th scope="col">Email</th>
+                                <th scope="col">Contact Number</th>
+                                <th scope="col">Address</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+
+                            <% users.forEach(user=> { %>
+                                <tr>
+                                    <td>
+                                        <%= user.fname %>
+                                    </td>
+                                    <td>
+                                        <%= user.lname %>
+                                    </td>
+                                    <td>
+                                        <%= user.email %>
+                                    </td>
+                                    <td>
+                                        <%= user.contactNumber %>
+                                    </td>
+                                    <td>
+                                        <%= user.address %>
+                                    </td>
+                                </tr>
+                                <% }); %>
+                        </tbody>
+                    </table>
+                    <% }%>
+
+        </div>
+
+
+        <%- include('partials/footer') %>

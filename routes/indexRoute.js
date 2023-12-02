@@ -15,11 +15,11 @@ route.get('/login', (req, res) => {
 
 route.post('/login', async (req, res) => {
     try {
-        const { email, password } = req.body;
-        if (!username || !password) {
+        const { email, password, type } = req.body;
+        if (!email || !password || !type) {
             return res.render('login', { message: "Please fill all fields" });
         }
-        const user = await User.findOne({ username });
+        const user = await User.findOne({ email });
         if (!user) {
             return res.render('login', { message: "User not found" });
         }
@@ -34,7 +34,10 @@ route.post('/login', async (req, res) => {
         // Set the token in a cookie (you can also send it in the response body)
         res.cookie('token', token, { httpOnly: true });
         res.cookie('user', user.email);
-        res.redirect('/dashboard');
+        if (type === 'admin') {
+            res.redirect('/admin/dashboard');
+        }
+        res.redirect('/user/dashboard');
     } catch (error) {
         console.log(error);
         res.render('login', { message: error.message });
@@ -59,6 +62,7 @@ route.get('/signup', async (req, res) => {
 route.post('/signup', async (req, res) => {
     try {
         const { fname, lname, email, contactNumber, address, password } = req.body;
+
         if (!fname || !lname || !email || !contactNumber || !address || !password) {
             return res.render('signup', { message: "Please fill all the fields" });
         }
@@ -72,8 +76,13 @@ route.post('/signup', async (req, res) => {
 });
 
 route.get('/books', async (req, res) => {
-    const books = Book.find();
-    res.render('books', { books: books });
+    try {
+        const books = await Book.find();
+
+        res.render('books', { books: books });
+    } catch (error) {
+        res.status(404).send(error.message)
+    }
 })
 
 module.exports = route;

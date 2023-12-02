@@ -1,18 +1,69 @@
 const route = require('express').Router();
 const Book = require('../models/bookModel');
+const BorrowHistory = require('../models/borrowHistoryModel');
+const User = require('../models/userModel');
+
+route.get('/users', async (req, res) => {
+    try {
+        const users = await User.find();
+        console.log(users);
+        res.render('users', { users });
+    } catch (error) {
+        res.status(400).send(error.message);
+    }
+});
+
+route.get('/dashboard', async (req, res) => {
+    res.render('adminDashboard');
+});
+
+route.post('/return-book', async (req, res) => {
+    const { returnId } = req.body;
+
+    try {
+        if (!returnId) {
+            return res.status(400).send("Invalid request. Please provide an array of returnId.");
+        }
+
+        // Find the borrowed books and update their status to "returned"
+        const updatedBorrowHistory = await BorrowHistory.findOneAndUpdate(
+            { _id: returnId, status: 'borrowed' }, // Only update if the status is "borrowed"
+            { status: 'returned', returnedDate: new Date() },
+        );
+
+        // Find the details of the returned books
+        const returnedBooks = await BorrowHistory.find({ _id: returnId, status: 'returned' });
+
+        // Update the available count of the books
+        for (const returnedBook of returnedBooks) {
+            const bookId = returnedBook.bookId;
+            await Book.findByIdAndUpdate(bookId, { $inc: { availableCopies: 1 } });
+        }
+
+        res.redirect('/dashboard');
+    } catch (error) {
+        console.error(error);
+        res.status(500).send("Internal Server Error");
+    }
+});
 
 route.get('/borrowed-books', async (req, res) => {
     try {
         // Find the borrowed books and populate the user and book details
         const borrowedBooks = await BorrowHistory.find({ status: 'borrowed' })
-            .populate('user')
-            .populate('book');
-
+            .populate('userId')
+            .populate('bookId');
+        console.log(borrowedBooks);
         res.render('borrowedBooks', { borrowedBooks });
     } catch (error) {
         console.error(error);
         res.status(500).send("Internal Server Error");
     }
+});
+
+route.get('/add-book', async (req, res) => {
+
+    res.render('addBook');
 });
 
 route.post('/add-book', async (req, res) => {
@@ -39,7 +90,7 @@ route.post('/add-book', async (req, res) => {
             genre,
         });
 
-        res.redirect('/dashboard');
+        res.redirect('/admin/dashboard');
     } catch (error) {
         console.error(error);
         res.status(500).send("Internal Server Error");
@@ -91,6 +142,7 @@ route.post('/edit-book/:id', async (req, res) => {
         res.status(500).send("Internal Server Error");
     }
 });
+
 
 
 module.exports = route

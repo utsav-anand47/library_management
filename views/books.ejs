@@ -2,78 +2,82 @@
 
     <div class="table_container table-responsive" style="padding: 110px 93px;">
         <h2>Books Available at Prayagraj</h2>
-        <table class="table table-hover table-bordered">
-            <thead>
-                <tr>
-                    <th scope="col"></th>
-                    <th scope="col">Book Title</th>
-                    <th scope="col">Author</th>
-                    <th scope="col">Publisher</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td class="borrower_checkbox">
-                        <input type="checkbox">
-                    </td>
-                    <td>Programming with Java</td>
-                    <td>E Balagurusamy</td>
-                    <td>Pearson</td>
-                </tr>
-                <tr>
-                    <td class="borrower_checkbox">
-                        <input type="checkbox">
-                    </td>
-                    <td>Programming World Wide Web</td>
-                    <td>Robertw. Sebesta</td>
-                    <td>Pearson </td>
-                </tr>
-                <tr>
-                    <td class="borrower_checkbox">
-                        <input type="checkbox">
-                    </td>
-                    <td>ASP.NET: The Complete Reference</td>
-                    <td>Matthew MacDonald</td>
-                    <td>Mc Graw Hill </td>
-                </tr>
-                <td class="borrower_checkbox">
-                    <input type="checkbox">
-                </td>
-                <td>C# 4.0 The Complete Reference</td>
-                <td>Herbert Schildt</td>
-                <td>Mc Graw Hill </td>
-                </tr>
-                <td class="borrower_checkbox">
-                    <input type="checkbox">
-                </td>
-                <td>HTML & CSS: The Complete Reference</td>
-                <td>By Thomas A. Powell</td>
-                <td>Mc Graw Hill </td>
-                </tr>
-                <td class="borrower_checkbox">
-                    <input type="checkbox">
-                </td>
-                <td>Object-Oriented Programming with C++</td>
-                <td>E Balagurusamy</td>
-                <td>Pearson </td>
-                </tr>
-                <td class="borrower_checkbox">
-                    <input type="checkbox">
-                </td>
-                <td>ARTIFICIAL INTELLIGENCE: A MODERN APPROACH</td>
-                <td>Russell/Norvig y</td>
-                <td>Pearson </td>
 
-                </tr>
-                <td class="borrower_checkbox">
-                    <input type="checkbox">
-                </td>
-                <td>The C Programming Language</td>
-                <td> Dennis Ritchie</td>
-                <td>Pearson </td>
-                </tr>
-            </tbody>
-        </table>
+        <div class="album py-5 bg-body-tertiary">
+            <div class="container">
+
+                <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3" id="poetry-container">
+
+                    <% books.forEach(book=> { %>
+                        <div class="col">
+                            <div class="card shadow-sm">
+                                <img src="<%= book.imgUrl %>" alt="" style="background-size: 100% 100%; height: 400px;">
+                                <div class="card-body">
+                                    <p class="card-text">
+                                        <%= book.title %>
+                                    </p>
+                                    <p class="card-text">
+                                        Author : <%= book.author %>
+                                    </p>
+                                    <p class="card-text">
+                                        Book Number : <%= book.bookNumber %>
+                                    </p>
+                                    <p class="card-text">
+                                        Available Copies : <%= book.availableCopies %>
+                                    </p>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div class="btn-group">
+                                            <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                                                data-bs-target="#modal<%= book._id %>">
+                                                View
+                                            </button>
+                                            <div class="modal fade" id="modal<%= book._id %>" data-bs-backdrop="static"
+                                                data-bs-keyboard="false" tabindex="-1"
+                                                aria-labelledby="modal<%= book._id %>Label" aria-hidden="true">
+                                                <div class="modal-dialog modal-dialog-centered">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <button type="button" class="btn-close"
+                                                                data-bs-dismiss="modal" aria-label="Close"></button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <img src="<%=  book.imgUrl %>" alt=""
+                                                                style="background-size: 100% 100%; height: 400px;">
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-secondary"
+                                                                data-bs-dismiss="modal">Close</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <form action="/user/addtocart" method="post">
+                                            <input type="hidden" name="bookId" value="<%= book._id %>">
+
+                                            <button type="button" class="btn btn-success">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                    fill="currentColor" class="bi bi-download" viewBox="0 0 16 16">
+                                                    <path
+                                                        d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z">
+                                                    </path>
+                                                    <path
+                                                        d="M7.646 11.854a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V1.5a.5.5 0 0 0-1 0v8.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3z">
+                                                    </path>
+                                                </svg>
+                                                <button type="submit"><strong>Add to cart</strong></button>
+                                            </button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <% }); %>
+
+
+                </div>
+            </div>
+        </div>
 
         <div class="submit_bttns">
             <a href="./selectBranch.html">

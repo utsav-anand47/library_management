@@ -9,20 +9,19 @@
         <form action="/signup" method="POST" id="form">
             <div class="firstname">
                 <label for="firstname">First Name</label><br />
-                <input type="text" name="firstname" class="firstname" id="firstname"
-                    placeholder="Type first name here" />
+                <input type="text" name="fname" class="firstname" id="firstname" required placeholder="Type first name here" />
                 <small></small>
             </div>
 
             <div class="lastname">
                 <label for="lastname">Last Name</label><br />
-                <input type="text" name="lastname" class="lastname" id="lastname" placeholder="Type last name here" />
+                <input type="text" name="lname" class="lastname" id="lastname" required placeholder="Type last name here" />
                 <small></small>
             </div>
 
             <div class="contact">
                 <label for="contact">Contact Number</label><br />
-                <input type="text" name="contact" class="contact" id="contact" placeholder="Type number here" />
+                <input type="number" name="contactNumber" class="contact" id="contact" required placeholder="Type number here" />
 
                 <small id="contact-error"></small>
 
@@ -30,14 +29,14 @@
 
             <div class="address">
                 <label for="adress">Address</label><br />
-                <textarea name="adress" class="address" id="address" placeholder="Type user Address here"></textarea>
+                <textarea name="address" class="address" id="address" required placeholder="Type user Address here"></textarea>
                 <div id="address-error"></div>
                 <small></small>
             </div>
 
             <div class="email">
                 <label for="email">Email Address</label><br />
-                <input type="email" name="email" class="email" id="email" placeholder="Type email address here" />
+                <input type="email" name="email" class="email" id="email" required placeholder="Type email address here" />
                 <small></small>
             </div>
 
@@ -45,7 +44,7 @@
 
             <div class="password">
                 <label for="email">Password</label><br />
-                <input type="password" name="email" class="email" id="email" placeholder=" password" />
+                <input type="password" name="password" class="email" required id="password" placeholder=" password" />
                 <small></small>
             </div>
             <!-- <div class="type">
@@ -63,7 +62,9 @@
                 </div>
                 <small id="type-error"></small>
             </div> -->
-
+            <p class="text-danger" style="color: red;font-size: 1.5rem;">
+                <%= message %>
+            </p>
             <div class="submit">
                 <input type="reset" value="Reset">
                 <input type="submit" class="button"></input>

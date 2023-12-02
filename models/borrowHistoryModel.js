@@ -13,11 +13,10 @@ const borrowHistorySchema = new mongoose.Schema({
     },
     borrowedDate: {
         type: Date,
-        default: Date.now,
+        default: new Date(),
     },
     returnedDate: {
         type: Date,
-        required: true,
     },
     status: {
         type: String,
