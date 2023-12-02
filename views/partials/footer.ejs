@@ -3,10 +3,25 @@
  footer comes here
 </footer> -->
 <script>
+
   if (decodeURIComponent(document.cookie)) {
     document.getElementById("auth-butns").style.display = "none";
     document.getElementById("auth-icon").style.display = "block";
-    document.getElementById("auth-icon-text").innerText = "Hello, " + decodeURIComponent(document.cookie).split("=")[1];
+    const name = decodeURIComponent(document.cookie).split(";")[0].split("=")[1]?.toUpperCase();
+    const role = decodeURIComponent(document.cookie).split(";")[1].split("=")[1]?.toUpperCase();
+    if (role === "ADMIN") {
+      document.getElementById("auth-icon-text").innerText = "Hello Admin, " + name;
+      document.getElementById("home-auth-link").href = "/admin/dashboard";
+      document.getElementById("home-auth-text").innerText = "Go To Admin Dashboard";
+    } else if (role === "USER") {
+      document.getElementById("auth-icon-text").innerText = "Hello User, " + name;
+      document.getElementById("home-auth-link").href = "/user/dashboard";
+      document.getElementById("home-auth-text").innerText = "Go To User Dashboard";
+    } else {
+      document.getElementById("auth-icon-text").innerText = "";
+      document.getElementById("home-auth-link").href = "/login";
+      document.getElementById("home-auth-text").innerText = "Role Based Login";
+    }
   } else {
     document.getElementById("auth-icon").style.display = "none";
     document.getElementById("auth-butns").style.display = "block";
