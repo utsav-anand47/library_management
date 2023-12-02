@@ -1,0 +1,241 @@
+/* ================================================= */
+
+
+/*                 Main Style                       */
+
+
+/* ================================================= */
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: "Open Sans", sans-serif;
+}
+
+
+/* ================================================= */
+
+
+/*             Style the Content                     */
+
+
+/* ================================================= */
+
+body {
+    /* background: rgb(164, 0, 230); */
+    background: linear-gradient( 90deg, rgba(164, 0, 230, 1) 0%, rgba(255, 59, 59, 1) 100%);
+}
+
+.box {
+    /*background-color: #eff0f4; */
+    /* background-color: rgb(220, 171, 253); */
+    width: 70%;
+    margin: 30px auto;
+    padding: 20px;
+    border-radius: 0.5rem;
+    border: rgb(255, 255, 255) solid 3px;
+    box-shadow: 5px 5px 10px #888888;
+}
+
+.box h2 {
+    font-family: "Open Sans", sans-serif;
+    font-weight: bold;
+    margin: 10px auto 20px auto;
+}
+
+.box form {
+    display: grid;
+    margin: 10px;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr 1.5fr 0.01fr;
+    grid-template-areas: "firstname email" "lastname type" "contact payment" "address empty" "submit submit";
+    grid-gap: 15px;
+}
+
+.box form label {
+    font-weight: bold;
+    font-size: 14pt;
+}
+
+.box form input,
+.box form textarea,
+.box form select {
+    margin: 5px 0;
+    font-size: 12pt;
+    padding: 5px 5px 5px 10px;
+    border-radius: 0.2rem;
+    border: 2px solid #819094;
+}
+
+.box form .radio {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    width: 65%;
+}
+
+.box form .radio .radio-block {
+    margin-left: 10px;
+    display: inline-block;
+}
+
+.box form .radio label {
+    font-weight: normal;
+    font-size: 12pt;
+}
+
+.box small {
+    color: rgb(187, 0, 0);
+    display: block;
+}
+
+.box .submit .button {
+    background: rgb(164, 0, 230);
+    background: linear-gradient( 90deg, rgba(164, 0, 230, 1) 0%, rgba(255, 59, 59, 1) 100%);
+    color: white;
+    font-size: 10pt;
+    border: none;
+    padding: 8px 30px;
+    font-weight: bold;
+    border: 3px solid white;
+    width: 100%;
+}
+
+
+/* ================================================= */
+
+
+/*             Assign Name to Grid                   */
+
+
+/* ================================================= */
+
+.firstname {
+    grid-area: firstname;
+}
+
+.lastname {
+    grid-area: lastname;
+}
+
+.contact {
+    grid-area: contact;
+}
+
+.address {
+    grid-area: address;
+}
+
+.email {
+    grid-area: email;
+}
+
+.type {
+    grid-area: type;
+}
+
+.payment {
+    grid-area: payment;
+}
+
+.submit {
+    grid-area: submit;
+    justify-content: center;
+    display: flex;
+}
+
+
+/* ================================================= */
+
+
+/*               Mobile Responsive                   */
+
+
+/* ================================================= */
+
+@media only screen and (max-width: 1350px) {
+    .box form .radio {
+        width: 80%;
+    }
+}
+
+@media only screen and (max-width: 1080px) {
+    .box form .radio {
+        width: 90%;
+    }
+}
+
+@media only screen and (max-width: 965px) {
+    .box form .radio {
+        width: 100%;
+    }
+}
+
+@media only screen and (max-width: 878px) {
+    .box form {
+        grid-template-rows: 1fr 1fr 1fr 1fr 0.01fr;
+    }
+    .box form .radio {
+        -webkit-box-orient: vertical;
+        -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+        flex-direction: column;
+    }
+}
+
+@media only screen and (max-width: 808px) {
+    .box form {
+        grid-template-rows: 1fr 1fr 1fr 1fr 0.01fr;
+    }
+    .box form .radio {
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -ms-flex-pack: distribute;
+        justify-content: space-around;
+        width: 80%;
+    }
+    .box form .radio .radio-block {
+        font-size: 19px;
+        display: block;
+    }
+}
+
+@media only screen and (max-width: 720px) {
+    .box form {
+        margin: auto;
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-orient: vertical;
+        -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+        flex-direction: column;
+        grid-template-columns: 1fr;
+        grid-template-rows: 1fr 1fr 1fr 1.5fr 1fr 1fr 1fr 0.01fr;
+        grid-template-areas: "firstname" "lastname" "contact" "address" "email" "type" "payment" "submit";
+    }
+    .box form .radio {
+        width: 100%;
+    }
+}
+
+@media only screen and (max-width: 400px) {
+    .box form {
+        width: 100%;
+    }
+}
+.box {
+    /* background-color: #eff0f4; */
+    background-color: rgb(220, 171, 253);
+    width: 50%;
+    margin: 100px auto;
+    padding: 40px;
+    border-radius: 1.5rem;
+    /* border: rgb(255, 255, 255) solid 3px; */
+    box-shadow: 5px 5px 10px #888888;
+}

@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Book Heaven | SignUp</title>
+  
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="../css/index.css">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="./css/registration.css">
+</head>
+
+<body>
+  <div class="navBar">
+    <div class="logo">
+      <a href="../index.html">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRWVtzJPYWqk2HU92x6ZZJVBK-58OyQAHiQqw&usqp=CAU" alt="book">
+        </a>
+       
+      </div>
+      <ul class="nav justify-content-end">
+        <li class="nav-item header-nav-item">
+          <a class=" class-home nav-link active" href="../index.html">HOME</a>
+        </li>
+       
+        <li class="nav-item header-nav-item">
+          <a class="  class-fac nav-link" href="../about.html">ABOUT</a>
+        </li>
+        <li class="nav-item header-nav-item">
+          <a class="  class-fac nav-link" href="../RegistrationForm.html">SIGN UP</a>
+        </li>
+        <li class="nav-item header-nav-item">
+          <a class="  class-fac nav-link" href="../contact.html">CONTACT US</a>
+        </li>
+       
+       
+          
+          
+      </ul>
+    </div>
+
+    <img class="backgroundImg" src="https://d4804za1f1gw.cloudfront.net/wp-content/uploads/sites/50/2018/11/hero.jpg" alt="img">
+    <div class="box">
+        <center>
+            <h2>Enter User Informations</h2>
+        </center>
+
+        <form action="#" method="POST" id="form">
+            <div class="firstname">
+                <label for="firstname">First Name</label><br />
+                <input type="text" name="firstname" class="firstname" id="firstname" placeholder="Type first name here" />
+                <small></small>
+            </div>
+
+            <div class="lastname">
+                <label for="lastname">Last Name</label><br />
+                <input type="text" name="lastname" class="lastname" id="lastname" placeholder="Type last name here" />
+                <small></small>
+            </div>
+
+            <div class="contact">
+                <label for="contact">Contact Number</label><br />
+                <input type="text" name="contact" class="contact" id="contact" placeholder="Type number here" />
+
+                <small id="contact-error"></small>
+
+            </div>
+
+            <div class="address">
+                <label for="adress">Address</label><br />
+                <textarea name="adress" class="address" id="address" placeholder="Type user Address here"></textarea>
+                <div id="address-error"></div>
+                <small></small>
+            </div>
+
+            <div class="email">
+                <label for="email">Email Address</label><br />
+                <input type="email" name="email" class="email" id="email" placeholder="Type email address here" />
+                <small></small>
+            </div>
+           
+
+            
+            <div class="password">
+                <label for="email">Password</label><br />
+                <input type="password" name="email" class="email" id="email" placeholder=" password" />
+                <small></small>
+            </div>
+            <div class="type">
+                <label for="type" id="test">User Type</label><br />
+                <div class="radio" class="type" id="type">
+                    <div class="radio-block">
+                        <input type="radio" name="type" id="radio-school" value="school" />
+                        <label for="school" class="radiotext">ADMIN</label>
+                    </div>
+                    
+                    <div class="radio-block">
+                        <input type="radio" name="type" id="radio-employee" value="employee" />
+                        <label for="employee" class="radiotext">USER</label>
+                    </div>
+                </div>
+                <small id="type-error"></small>
+            </div>
+
+            <div class="submit">
+              <input type="reset" value="Reset">
+<!-- <input type="submit"   value="Submit"> -->
+                <input type="submit" onclick="myFunction()" value="Submit" class="button"></input>
+            </div>
+        </form>
+    </div>
+    <script>
+      function myFunction() {
+          // document.getElementById("demo").innerHTML =alert( "NOW YOU CAN ENTER YOUR NAME AS YOUR USER NAME AND PASSWORD FOR ENTER TO THE WEBSITE");
+
+          alert("Registration successful!");
+          window.location.href = "../index.html";
+      }
+      
+      </script>
+
+    <script src="./registration.js "></script>
+
+</body>
+
+</html>

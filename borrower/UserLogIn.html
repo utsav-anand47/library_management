@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Book Heaven | Login</title>
+<script src="./js/validateAdmin.js"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <!-- <link rel="stylesheet" href="../css/index.css"> -->
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/login.css">
+</head>
+
+<body>
+  <div class="navBar">
+    <div class="logo">
+      <a href="../index.html">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRWVtzJPYWqk2HU92x6ZZJVBK-58OyQAHiQqw&usqp=CAU" alt="book">
+        </a>
+       
+      </div>
+      <ul class="nav justify-content-end">
+        <li class="nav-item header-nav-item">
+          <a class=" class-home nav-link active" href="../index.html">HOME</a>
+        </li>
+        
+          
+          
+      </ul>
+    </div>
+  <img class="backgroundImg" src="https://assets.entrepreneur.com/content/3x2/2000/20150115183825-books-reading.jpeg" alt="img">
+    <div class="auth">
+        <div class="auth-container">
+            <div class="auth-logo">
+
+            </div>
+            <form action="" method="post" class="auth-form">
+                <h1>Sign in</h1>
+                <div class="auth-input error">
+                    <label for="email">
+                        E-Mail
+                    </label>
+                    <input type="email" name="email" id="name" />
+                    <p class="auth-error">E-Mail is a required field.</p>
+                </div>
+                <div class="auth-input">
+                    <label for="password">
+                        Password
+                    </label>
+                    <input type="password" name="password" id="password" />
+                </div>
+                <a href="./borrowerOptions.html" class="auth-reset">Click to Go User Dashboard Directly</a>
+                <!-- <button type="submit" name="submit" class="auth-btn" onclick="checkCredentials()" > Sign in</button> -->
+
+<!-- 
+                <div class="submit">
+                  <input type="reset" value="Reset">
+    <input type="submit" onclick="myFunction()" value="submit">
+    </div> -->
+    <!-- <input type="button" onclick="myFunction()" value="Submit"> -->
+                    <!-- <input type="submit" value="Submit" class="button"></input> -->
+                    <button type="submit" name="submit" class="auth-btn" onclick="checkCredentials()" > Sign in</button>
+                </div>
+            </form>
+            <div class="auth-bottom">
+                Don't have an account yet? <a href="../RegistrationForm.html">Create Now</a>
+            </div>
+        </div>
+    </div>
+    <script>
+      function myFunction() {
+          document.getElementById("name").innerHTML =alert( "NOW YOU CAN ENTER YOUR NAME AS YOUR USER NAME AND PASSWORD FOR ENTER TO THE WEBSITE");
+      }
+      
+      </script>
+</body>
+
+</html>
