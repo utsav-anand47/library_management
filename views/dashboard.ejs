@@ -18,13 +18,60 @@
                                 <th scope="col">Author</th>
                                 <th scope="col">Book number</th>
                                 <th scope="col">Borrowed Date</th>
-                                <th scope="col">Returned Date</th>
+                                <th scope="col">Expexted Returned Date</th>
                             </tr>
                         </thead>
                         <tbody>
 
 
                             <% takenBooks.forEach(book=> { %>
+                                <tr>
+                                    <td>
+                                        <%= book.bookId.title %>
+                                    </td>
+                                    <td>
+                                        <%= book.bookId.author %>
+                                    </td>
+                                    <td>
+                                        <%= book.bookId.bookNumber %>
+                                    </td>
+                                    <td>
+                                        <%= book.borrowedDate %>
+                                    </td>
+                                    <td>
+                                        <%= book.expextedReturnedDate %>
+                                    </td>
+                                </tr>
+                                <% }); %>
+                        </tbody>
+                    </table>
+                    <% }%>
+
+        </div>
+
+        <hr>
+        <hr>
+
+        <div class="table_container table-responsive" style="padding: 10px 93px;">
+            <h2>Books You have Returned</h2>
+
+            <% if (returnedBooks.length===0) { %>
+                <p>No Book returned</p>
+                <% } else { %>
+                    <table class="table table-hover table-bordered">
+                        <thead>
+                            <tr>
+                                <th scope="col">Book Title</th>
+                                <th scope="col">Author</th>
+                                <th scope="col">Book number</th>
+                                <th scope="col">Borrowed Date</th>
+                                <th scope="col">Returned Date</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+
+                            <% returnedBooks.forEach(book=> { %>
                                 <tr>
                                     <td>
                                         <%= book.bookId.title %>

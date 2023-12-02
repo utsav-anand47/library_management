@@ -1,14 +1,66 @@
 const route = require('express').Router();
 const Book = require('../models/bookModel');
 const BorrowHistory = require('../models/borrowHistoryModel');
+const User = require('../models/userModel');
+
+
+route.get('/profile', async (req, res) => {
+    const userId = req.user.id;
+    try {
+        const profileData = await User.findById(userId);
+
+        res.render('profile', { profileData, message: "" });
+    } catch (error) {
+        res.status(404).send(error.message);
+    }
+});
+
+route.post('/profile', async (req, res) => {
+    const { fname, lname, email, contactNumber, oldPassword, newPassword, address } = req.body;
+    const userId = req.user.id;
+    try {
+        const existingProfileData = await User.findById(userId);
+        if (!existingProfileData) {
+            return res.status(400).send("User not found");
+        }
+
+
+        if (oldPassword) {
+            if (oldPassword !== newPassword) {
+                return res.render('profile', { profileData: existingProfileData, message: "Password not matched" });
+            }
+
+            const matchPasswd = await bcrypt.compare(oldPassword, existingProfileData.password);
+            if (!matchPasswd) {
+                return res.render('profile', { profileData: existingProfileData, message: "Invalid credentials" });
+            }
+            existingProfileData.password = password;
+        }
+
+        // Update the book details
+        existingProfileData.fname = fname;
+        existingProfileData.lname = lname;
+        existingProfileData.email = email;
+        existingProfileData.contactNumber = contactNumber;
+        existingProfileData.address = address;
+
+        // Save the updated book details to the database
+        await existingProfileData.save();
+
+        res.redirect('/user/profile');
+    } catch (error) {
+        console.log(error);
+        res.status(404).send(error.message);
+    }
+});
 
 
 route.get('/dashboard', async (req, res) => {
     const userId = req.user.id;
     try {
-        const takenBooks = await BorrowHistory.find({ userId: userId }).populate('bookId');
-        console.log(takenBooks);
-        res.render('dashboard', { takenBooks });
+        const takenBooks = await BorrowHistory.find({ userId: userId, status: 'borrowed' }).populate('bookId');
+        const returnedBooks = await BorrowHistory.find({ userId: userId, status: 'returned' }).populate('bookId');
+        res.render('dashboard', { takenBooks, returnedBooks });
     } catch (error) {
         res.status(404).send(error.message);
     }
