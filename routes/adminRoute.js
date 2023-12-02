@@ -3,7 +3,8 @@ const { default: mongoose } = require('mongoose');
 const Book = require('../models/bookModel');
 const BorrowHistory = require('../models/borrowHistoryModel');
 const User = require('../models/userModel');
-const checkDiff = require('../config/ckeckDiff')
+const checkDiff = require('../config/ckeckDiff');
+const upload = require('../config/multer');
 
 route.get('/users', async (req, res) => {
     try {
@@ -91,7 +92,7 @@ route.get('/add-book', async (req, res) => {
     res.render('addBook');
 });
 
-route.post('/add-book', async (req, res) => {
+route.post('/add-book', upload.single('img'), async (req, res) => {
     const { title, author, bookNumber, totalCopies, genre } = req.body;
 
     try {
@@ -99,10 +100,16 @@ route.post('/add-book', async (req, res) => {
             return res.status(400).send("Please fill all fields");
         }
 
+
+
         // Check if the book with the given ISBN already exists
         const existingBook = await Book.findOne({ bookNumber });
         if (existingBook) {
             return res.status(400).send("Book with the given Book Number already exists");
+        }
+        let imgUrl = "";
+        if (req.file) {
+            imgUrl = "/uploads/" + req.file.filename;
         }
 
         // Create a new book
@@ -110,12 +117,13 @@ route.post('/add-book', async (req, res) => {
             title,
             author,
             bookNumber,
+            imgUrl,
             totalCopies,
             availableCopies: totalCopies, // Initially, all copies are available
             genre,
         });
 
-        res.redirect('/admin/dashboard');
+        res.redirect('/admin/books');
     } catch (error) {
         console.error(error);
         res.status(500).send("Internal Server Error");
@@ -143,7 +151,7 @@ route.get('/edit-book/:id', async (req, res) => {
     }
 });
 
-route.post('/edit-book/:id', async (req, res) => {
+route.post('/edit-book/:id', upload.single('img'), async (req, res) => {
     const bookId = req.params.id;
     const { title, author, totalCopies, genre } = req.body;
 
@@ -154,6 +162,9 @@ route.post('/edit-book/:id', async (req, res) => {
             return res.status(404).send("Book not found");
         }
 
+        if (req.file) {
+            existingBook.imgUrl = "/uploads/" + req.file.filename;
+        }
         // Update the book details
         existingBook.title = title;
         existingBook.author = author;

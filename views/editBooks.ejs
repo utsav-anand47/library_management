@@ -12,31 +12,37 @@
                         <% books.forEach(book=> { %>
                             <div class="col">
                                 <div class="card shadow-sm">
-                                    <img src="<%= book.imgUrl %>" alt=""
-                                        style="background-size: 100% 100%; height: 200px;">
-                                    <div class="card-body">
-                                        <p class="card-text">
-                                            Title : <%= book.title %>
-                                        </p>
-                                        <p class="card-text">
-                                            Author : <%= book.author %>
-                                        </p>
-                                        <p class="card-text">
-                                            Book Number : <%= book.bookNumber %>
-                                        </p>
-                                        <p class="card-text">
-                                            Available Copies : <%= book.availableCopies %>
-                                        </p>
-                                        <p class="card-text">
-                                            Total Copies : <%= book.totalCopies %>
-                                        </p>
-                                        <div class="d-flex justify-content-center align-items-center">
-                                            <form action="/admin/edit-book/<%= book._id  %>" method="get">
-                                                <input type="hidden" name="bookId" value="<%= book._id %>">
-                                                <button type="submit"><strong>Edit the details</strong></button>
-                                            </form>
-                                        </div>
-                                    </div>
+                                    <% if(book.imgUrl) { %>
+                                        <img src="<%= book.imgUrl %>" alt=""
+                                            style="background-size: 100% 100%; height: 200px;">
+                                        <% } else { %>
+                                            <img src="/assets/book.png" alt=""
+                                                style="background-size: 100% 100%; height: 200px;">
+                                            <% } %>
+                                                <div class="card-body">
+                                                    <p class="card-text">
+                                                        Title : <%= book.title %>
+                                                    </p>
+                                                    <p class="card-text">
+                                                        Author : <%= book.author %>
+                                                    </p>
+                                                    <p class="card-text">
+                                                        Book Number : <%= book.bookNumber %>
+                                                    </p>
+                                                    <p class="card-text">
+                                                        Available Copies : <%= book.availableCopies %>
+                                                    </p>
+                                                    <p class="card-text">
+                                                        Total Copies : <%= book.totalCopies %>
+                                                    </p>
+                                                    <div class="d-flex justify-content-center align-items-center">
+                                                        <form action="/admin/edit-book/<%= book._id  %>" method="get">
+                                                            <input type="hidden" name="bookId" value="<%= book._id %>">
+                                                            <button type="submit"><strong>Edit the
+                                                                    details</strong></button>
+                                                        </form>
+                                                    </div>
+                                                </div>
                                 </div>
                             </div>
                             <% }); %>
