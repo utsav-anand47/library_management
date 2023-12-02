@@ -1,22 +1,25 @@
 <%- include('partials/header') %>
     <%- include('partials/adminNav') %>
-        <div class="container">
-            <h2 class="text-center m-3"> Take Book from student:</h2>
-            <form action="/admin/take-book" method="post">
+        <div class="container my-3">
+            <div class="adminTable">
+                <h2 class="text-center m-3"> Take Book from student:</h2>
+                <form action="/admin/take-book" method="post">
 
-                <label for="author">Email:</label>
-                <input type="text" id="email" name="email" required>
+                    <label for="author">Email:</label>
+                    <input type="text" id="email" name="email" required>
 
-                <label for="bookNumber">Book Number:</label>
-                <input type="text" id="bookNumber" name="bookNumber" required>
+                    <label for="bookNumber">Book Number:</label>
+                    <input type="text" id="bookNumber" name="bookNumber" required>
 
 
-                <div class="d-flex justify-content-center">
-                    <button type="submit" class="m-2 p-2">Check</button>
-                </div>
-            </form>
-            <h3 class="text-center" style="color: aliceblue;">
-                <%= message %>
-            </h3>
+                    <div class="d-flex justify-content-center">
+                        <button type="submit" class="m-2 p-2">Check</button>
+                    </div>
+                </form>
+                <h3 class="text-center" style="color: aliceblue;">
+                    <%= message %>
+                </h3>
+            </div>
         </div>
+
         <%- include('partials/footer') %>

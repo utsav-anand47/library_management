@@ -8,7 +8,6 @@ const checkDiff = require('../config/ckeckDiff')
 route.get('/users', async (req, res) => {
     try {
         const users = await User.find();
-        console.log(users);
         res.render('users', { users });
     } catch (error) {
         res.status(400).send(error.message);
@@ -52,7 +51,7 @@ route.post('/take-book', async (req, res) => {
         if (!foundBook) {
             return res.render('takeBook', { message: "Book not found" });
         }
-        console.log(foundBook);
+
 
         const updatedBorrowHistory = await BorrowHistory.findOneAndUpdate(
             { bookId: foundBook._id, userId: foundUser._id, status: 'borrowed' }, // Only update if the status is "borrowed"
@@ -79,7 +78,7 @@ route.get('/borrowed-books', async (req, res) => {
         const borrowedBooks = await BorrowHistory.find({ status: 'borrowed' })
             .populate('userId')
             .populate('bookId');
-        console.log(borrowedBooks);
+
         res.render('borrowedBooks', { borrowedBooks });
     } catch (error) {
         console.error(error);

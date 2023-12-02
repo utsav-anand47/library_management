@@ -2,7 +2,7 @@
     <%- include('partials/adminNav') %>
 
         <div class="table_container table-responsive" style="padding: 110px 93px;">
-            <h2>Books All User have taken</h2>
+            <h2>List Of All User:</h2>
 
             <% if (users.length===0) { %>
                 <p>No Users</p>
@@ -15,6 +15,7 @@
                                 <th scope="col">Email</th>
                                 <th scope="col">Contact Number</th>
                                 <th scope="col">Address</th>
+                                <th scope="col">Role</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -36,6 +37,9 @@
                                     </td>
                                     <td>
                                         <%= user.address %>
+                                    </td>
+                                    <td>
+                                        <%= user.type %>
                                     </td>
                                 </tr>
                                 <% }); %>

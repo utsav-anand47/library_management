@@ -31,7 +31,7 @@
                                             Total Copies : <%= book.totalCopies %>
                                         </p>
                                         <div class="d-flex justify-content-center align-items-center">
-                                            <form action="/admin/edit-book/<%= book._id  %>" method="post">
+                                            <form action="/admin/edit-book/<%= book._id  %>" method="get">
                                                 <input type="hidden" name="bookId" value="<%= book._id %>">
                                                 <button type="submit"><strong>Edit the details</strong></button>
                                             </form>
@@ -44,15 +44,6 @@
 
                     </div>
                 </div>
-            </div>
-
-            <div class="submit_bttns">
-                <a href="./selectBranch.html">
-                    <button class="cancel">Cancel</button>
-                </a>
-                <a href="#">
-                    <button class="checkout">Checkout Books</button>
-                </a>
             </div>
         </div>
 
