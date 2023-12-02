@@ -1,0 +1,31 @@
+<%- include('partials/header') %>
+    <%- include('partials/adminNav') %>
+
+        <div class="container">
+            <h2 class="text-center m-3"> You are editing the details of Book:</h2>
+            <form action="/admin/edit-book/<%= book._id %>" method="post">
+                <label for="title">Title:</label>
+                <input type="text" id="title" name="title" value="<%= book.title %>" required>
+
+                <label for="author">Author:</label>
+                <input type="text" id="author" name="author" value="<%= book.author %>" required>
+
+                <label for="bookNumber">Book Number:</label>
+                <input type="text" id="bookNumber" name="bookNumber" value="<%= book.bookNumber %>" required>
+
+                <label for="availableCopies">Available Copies:</label>
+                <input type="number" id="availableCopies" name="availableCopies" value="<%= book.availableCopies %>"
+                    required>
+
+                <label for="totalCopies">Total Copies:</label>
+                <input type="number" id="totalCopies" name="totalCopies" value="<%= book.totalCopies %>" required>
+
+                <label for="genre">Genre:</label>
+                <input type="text" id="genre" name="genre" value="<%= book.genre %>" required>
+
+                <div class="d-flex justify-content-center">
+                    <button type="submit" class="m-2 p-2">Save Changes</button>
+                </div>
+            </form>
+        </div>
+        <%- include('partials/footer') %>

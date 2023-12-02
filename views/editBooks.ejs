@@ -1,8 +1,8 @@
 <%- include('partials/header') %>
-    <%- include('partials/userNav') %>
+    <%- include('partials/adminNav') %>
 
         <div class="table_container table-responsive" style="padding: 110px 93px;">
-            <h2>Books Available</h2>
+            <h2 class="text-center">Books Available</h2>
 
             <div class="album py-5 bg-body-tertiary">
                 <div class="container">
@@ -16,7 +16,7 @@
                                         style="background-size: 100% 100%; height: 200px;">
                                     <div class="card-body">
                                         <p class="card-text">
-                                            <%= book.title %>
+                                            Title : <%= book.title %>
                                         </p>
                                         <p class="card-text">
                                             Author : <%= book.author %>
@@ -27,10 +27,13 @@
                                         <p class="card-text">
                                             Available Copies : <%= book.availableCopies %>
                                         </p>
+                                        <p class="card-text">
+                                            Total Copies : <%= book.totalCopies %>
+                                        </p>
                                         <div class="d-flex justify-content-center align-items-center">
-                                            <form action="/user/addtocart" method="post">
+                                            <form action="/admin/edit-book/<%= book._id  %>" method="post">
                                                 <input type="hidden" name="bookId" value="<%= book._id %>">
-                                                <button type="submit"><strong>Add to cart</strong></button>
+                                                <button type="submit"><strong>Edit the details</strong></button>
                                             </form>
                                         </div>
                                     </div>

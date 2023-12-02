@@ -18,6 +18,9 @@ const borrowHistorySchema = new mongoose.Schema({
     returnedDate: {
         type: Date,
     },
+    expextedReturnedDate: {
+        type: Date,
+    },
     status: {
         type: String,
         enum: ['cart', 'borrowed', 'returned'],

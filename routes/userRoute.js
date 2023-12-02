@@ -56,12 +56,12 @@ route.post('/checkout-books', async (req, res) => {
         if (!borrowIds || !returnDate || !Array.isArray(borrowIds)) {
             return res.status(400).send("Invalid request. Please provide sufficent data.");
         }
-        
+
         // Find the borrowed books and update their status to "borrowed"
         const typeDate = new Date(returnDate);
         const updatedBorrowHistory = await BorrowHistory.updateMany(
             { _id: { $in: borrowIds }, status: 'cart' }, // Only update if the status is "cart"
-            { status: 'borrowed', returnedDate: typeDate, borrowedDate: new Date() },
+            { status: 'borrowed', expextedReturnedDate: typeDate, borrowedDate: new Date() },
         );
 
         // Find the details of the borrowed books

@@ -1,84 +1,85 @@
 <%- include('partials/header') %>
+    <%- include('partials/userNav') %>
 
-    <div class="table_container table-responsive" style="padding: 110px 93px;">
-        <h2>Books Available at Prayagraj</h2>
+        <div class="table_container table-responsive" style="padding: 110px 93px;">
+            <h2>Books Available at Prayagraj</h2>
 
-        <% if (cartBooks.length===0) { %>
-            <p>No Items in cart</p>
-            <% } else { %>
-                <table class="table table-hover table-bordered">
-                    <thead>
-                        <tr>
-                            <th scope="col"></th>
-                            <th scope="col">Book Title</th>
-                            <th scope="col">Author</th>
-                            <th scope="col">Publisher</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-
-
-                        <% cartBooks.forEach(book=> { %>
+            <% if (cartBooks.length===0) { %>
+                <p>No Items in cart</p>
+                <% } else { %>
+                    <table class="table table-hover table-bordered">
+                        <thead>
                             <tr>
-                                <td class="borrower_checkbox">
-                                    <input name="bookId" type="checkbox" value="<%= book._id %>">
-                                </td>
-                                <td>
-                                    <%= book.bookId.title %>
-                                </td>
-                                <td>
-                                    <%= book.bookId.author %>
-                                </td>
-                                <td>
-                                    <%= book.bookId.bookNumber %>
-                                </td>
+                                <th scope="col"></th>
+                                <th scope="col">Book Title</th>
+                                <th scope="col">Author</th>
+                                <th scope="col">Publisher</th>
                             </tr>
-                            <% }); %>
-                    </tbody>
-                </table>
+                        </thead>
+                        <tbody>
 
-                <div>
-                    <b>Return date</b>
-                    <input type="date" name="" id="returnDate">
-                </div>
 
-                <div class="submit_bttns">
-                    <a href="./selectBranch.html">
-                        <button class="cancel">Cancel</button>
-                    </a>
+                            <% cartBooks.forEach(book=> { %>
+                                <tr>
+                                    <td class="borrower_checkbox">
+                                        <input name="bookId" type="checkbox" value="<%= book._id %>">
+                                    </td>
+                                    <td>
+                                        <%= book.bookId.title %>
+                                    </td>
+                                    <td>
+                                        <%= book.bookId.author %>
+                                    </td>
+                                    <td>
+                                        <%= book.bookId.bookNumber %>
+                                    </td>
+                                </tr>
+                                <% }); %>
+                        </tbody>
+                    </table>
 
-                    <button id="checkoutButton" class="checkout">Checkout Books</button>
+                    <div>
+                        <b>Return date</b>
+                        <input type="date" name="" id="returnDate">
+                    </div>
 
-                </div>
-                <% }%>
+                    <div class="submit_bttns">
+                        <a href="./selectBranch.html">
+                            <button class="cancel">Cancel</button>
+                        </a>
 
-    </div>
+                        <button id="checkoutButton" class="checkout">Checkout Books</button>
 
-    <script>
-        // When the "Checkout Books" button is clicked
-        document.getElementById('checkoutButton').addEventListener('click', function () {
-            // Get selected book IDs
-            const selectedBookIds = []
-            document.querySelectorAll('input[name="bookId"]:checked').forEach(element => {
-                selectedBookIds.push(element.value);
+                    </div>
+                    <% }%>
+
+        </div>
+
+        <script>
+            // When the "Checkout Books" button is clicked
+            document.getElementById('checkoutButton').addEventListener('click', function () {
+                // Get selected book IDs
+                const selectedBookIds = []
+                document.querySelectorAll('input[name="bookId"]:checked').forEach(element => {
+                    selectedBookIds.push(element.value);
+                });
+                const returnDate = document.getElementById('returnDate').value;
+
+                // Send selected book IDs to the server
+                fetch('/user/checkout-books', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        // other headers if needed
+                    },
+                    body: JSON.stringify({
+                        borrowIds: selectedBookIds,
+                        returnDate: returnDate,
+                    }), // Convert the object to a JSON string
+                })
+                    .then(response => response.json())
+                    .then(data => console.log(data))
+                    .catch(error => console.error(error));
             });
-            const returnDate = document.getElementById('returnDate').value;
-
-            // Send selected book IDs to the server
-            fetch('/user/checkout-books', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    // other headers if needed
-                },
-                body: JSON.stringify({
-                    borrowIds: selectedBookIds,
-                    returnDate: returnDate,
-                }), // Convert the object to a JSON string
-            })
-                .then(response => response.json())
-                .then(data => console.log(data))
-                .catch(error => console.error(error));
-        });
-    </script>
-    <%- include('partials/footer') %>
+        </script>
+        <%- include('partials/footer') %>

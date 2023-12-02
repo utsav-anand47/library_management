@@ -1,7 +1,9 @@
 const route = require('express').Router();
+const { default: mongoose } = require('mongoose');
 const Book = require('../models/bookModel');
 const BorrowHistory = require('../models/borrowHistoryModel');
 const User = require('../models/userModel');
+const checkDiff = require('../config/ckeckDiff')
 
 route.get('/users', async (req, res) => {
     try {
@@ -13,34 +15,58 @@ route.get('/users', async (req, res) => {
     }
 });
 
+route.get('/books', async (req, res) => {
+    try {
+        const books = await Book.find();
+        res.render('editBooks', { books });
+    } catch (error) {
+        res.status(400).send(error.message)
+    }
+
+});
+
 route.get('/dashboard', async (req, res) => {
     res.render('adminDashboard');
 });
 
-route.post('/return-book', async (req, res) => {
-    const { returnId } = req.body;
+route.get('/take-book', async (req, res) => {
+    res.render('takeBook', { message: "" });
+});
+
+route.post('/take-book', async (req, res) => {
+    const { bookNumber, email } = req.body;
 
     try {
-        if (!returnId) {
-            return res.status(400).send("Invalid request. Please provide an array of returnId.");
+        if (!bookNumber || !email) {
+            return res.status(400).send("Please provide any values.");
         }
 
-        // Find the borrowed books and update their status to "returned"
+        const foundBook = await Book.findOne({ bookNumber });
+
+        if (!foundBook) {
+            return res.render('takeBook', { message: "Book not found" });
+        }
+
+        const foundUser = await User.findOne({ email });
+
+        if (!foundBook) {
+            return res.render('takeBook', { message: "Book not found" });
+        }
+        console.log(foundBook);
+
         const updatedBorrowHistory = await BorrowHistory.findOneAndUpdate(
-            { _id: returnId, status: 'borrowed' }, // Only update if the status is "borrowed"
+            { bookId: foundBook._id, userId: foundUser._id, status: 'borrowed' }, // Only update if the status is "borrowed"
             { status: 'returned', returnedDate: new Date() },
         );
 
-        // Find the details of the returned books
-        const returnedBooks = await BorrowHistory.find({ _id: returnId, status: 'returned' });
-
-        // Update the available count of the books
-        for (const returnedBook of returnedBooks) {
-            const bookId = returnedBook.bookId;
-            await Book.findByIdAndUpdate(bookId, { $inc: { availableCopies: 1 } });
+        if (!updatedBorrowHistory) {
+            return res.render('takeBook', { message: "No book found with the given details" });
         }
 
-        res.redirect('/dashboard');
+        await Book.findOneAndUpdate({ bookNumber },
+            { $inc: { availableCopies: 1 } });
+
+        res.render('takeBook', { message: "You are returning after " + checkDiff(updatedBorrowHistory.expextedReturnedDate, updatedBorrowHistory.returnedDate) + " days." });
     } catch (error) {
         console.error(error);
         res.status(500).send("Internal Server Error");
@@ -97,11 +123,13 @@ route.post('/add-book', async (req, res) => {
     }
 });
 
-
 route.get('/edit-book/:id', async (req, res) => {
     const bookId = req.params.id;
 
     try {
+        if (!mongoose.Types.ObjectId.isValid(bookId)) {
+            return res.status(400).send('Invalid bookId format');
+        }
         // Check if the book exists
         const existingBook = await Book.findById(bookId);
         if (!existingBook) {
@@ -112,7 +140,7 @@ route.get('/edit-book/:id', async (req, res) => {
         res.render('editBook', { book: existingBook });
     } catch (error) {
         console.error(error);
-        res.status(500).send("Internal Server Error");
+        res.status(500).send(error.message);
     }
 });
 
@@ -136,7 +164,7 @@ route.post('/edit-book/:id', async (req, res) => {
         // Save the updated book details to the database
         await existingBook.save();
 
-        res.redirect('/dashboard');
+        res.redirect('/admin/books');
     } catch (error) {
         console.error(error);
         res.status(500).send("Internal Server Error");

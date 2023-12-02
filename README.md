@@ -1,4 +1,4 @@
-# mini_project_backend
+# book-heaven
 
 # Features
 - login
@@ -10,6 +10,6 @@
 - ADMIN
   1. signup
   2. add book
-  3. edit book details
-  4. see which book is taken by which user with detail(bowrowers list)
+  3. see which book is taken by which user with detail(bowrowers list)
+  4. edit book details
   5. take return book
