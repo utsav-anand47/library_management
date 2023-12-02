@@ -1,0 +1,23 @@
+<%- include('partials/header') %>
+
+    <div class="container align-items-center justify-content-center py-4 bg-body-tertiary border"
+        style="max-width:max-content">
+        <form action="/poetry/upload" method="post" enctype="multipart/form-data">
+
+            <div class="mb-3 form-control-dark">
+                <label class="form-label">Title:</label>
+                <input class="form-control" name="title" type="text">
+            </div>
+
+            <div class="mb-3 form-control-dark">
+                <label for="formFile" class="form-label">choose image (Less than 100Kb):</label>
+                <input class="form-control" name="img" type="file" accept="image/*" id="formFile">
+            </div>
+
+            <button class="btn btn-primary w-100 py-2" type="submit">Upload</button>
+
+        </form>
+    </div>
+
+
+    <%- include('partials/footer') %>
