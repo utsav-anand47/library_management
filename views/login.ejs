@@ -1,32 +1,33 @@
 <%- include('partials/header') %>
 
-    <img class="backgroundImg" src="https://assets.entrepreneur.com/content/3x2/2000/20150115183825-books-reading.jpeg"
-        alt="img">
-    <div class="auth">
-        <div class="auth-container">
-            <div class="auth-logo">
+    <!-- <img class="backgroundImg" src="https://assets.entrepreneur.com/content/3x2/2000/20150115183825-books-reading.jpeg"
+        alt="img"> -->
+    <div class="loginBackgroundImg"></div>
+    <div class="innerMain">
+        <div class="auth">
+            <div class="auth-container">
+                <div class="auth-logo">
 
-            </div>
-            <form action="/login" method="post" class="auth-form">
-                <h1>Sign in</h1>
-                <div class="auth-input error">
-                    <label for="email">
-                        E-Mail
-                    </label>
-                    <input type="email" name="email" id="name" required />
-                    <!-- <p class="auth-error">E-Mail is a required field.</p> -->
                 </div>
-                <div class="auth-input">
-                    <label for="password">
-                        Password
-                    </label>
-                    <input type="password" name="password" id="password" required />
-                </div>
-                <p class="text-danger" style="color: red;">
-                    <%= message %>
-                </p>
+                <form action="/login" method="post" class="auth-form">
+                    <h1>Sign in</h1>
+                    <div class="auth-input error">
+                        <label for="email">
+                            E-Mail
+                        </label>
+                        <input type="email" name="email" id="name" required />
+                    </div>
+                    <div class="auth-input">
+                        <label for="password">
+                            Password
+                        </label>
+                        <input type="password" name="password" id="password" required />
+                    </div>
+                    <p class="text-danger" style="color: red;">
+                        <%= message %>
+                    </p>
 
-                <!-- <div class="type">
+                    <!-- <div class="type">
                     <label for="type" id="test">User Type</label><br />
                     <div class="radio" class="type" id="type">
                         <div class="radio-block">
@@ -41,13 +42,13 @@
                     </div>
                     <small id="type-error"></small>
                 </div> -->
-                <button type="submit" class="auth-btn"">Sign in</button>
+                    <button type="submit" class="auth-btn"">Sign in</button>
         </div>
         </form>
         <div class=" auth-bottom">
-                    Don't have an account yet? <a href="/signup">Create Now</a>
+                        Don't have an account yet? <a href="/signup">Create Now</a>
+            </div>
         </div>
-    </div>
     </div>
 
     <%- include('partials/footer') %>

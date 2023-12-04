@@ -42,16 +42,19 @@
                         <b>Return date</b>
                         <input type="date" name="" id="returnDate">
                     </div>
-
+                    <p class="text-danger" id="error-msg"></p>
+                    <p class="text-danger">
+                        <%= message %>
+                    </p>
                     <div class="submit_bttns">
-                        <a href="./selectBranch.html">
+                        <a href="/user/dashboard">
                             <button class="cancel">Cancel</button>
                         </a>
 
                         <button id="checkoutButton" class="checkout">Checkout Books</button>
 
                     </div>
-                    <% }%>
+                    <% } %>
 
         </div>
 
@@ -77,9 +80,14 @@
                         returnDate: returnDate,
                     }), // Convert the object to a JSON string
                 })
-                    .then(response => response.json())
-                    .then(data => console.log(data))
-                    .catch(error => console.error(error));
+                    .then(response => {
+                        response.json();
+                        // window.location.reload();
+                    })
+                    .catch(error => {
+                        console.error(error);
+                        document.getElementById("error-msg").innerHTML = error.message;
+                    });
             });
         </script>
         <%- include('partials/footer') %>

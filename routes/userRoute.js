@@ -94,7 +94,7 @@ route.get('/checkout-books', async (req, res) => {
     try {
         const cartBooks = await BorrowHistory.find({ userId: userId, status: "cart" }).populate('bookId');
 
-        res.render('checkoutBook', { cartBooks });
+        res.render('checkoutBook', { cartBooks, message: "" });
     } catch (error) {
         res.status(404).send(error.message);
     }
@@ -103,10 +103,12 @@ route.get('/checkout-books', async (req, res) => {
 
 route.post('/checkout-books', async (req, res) => {
     const { borrowIds, returnDate } = req.body;
+    const userId = req.user.id;
 
     try {
         if (!borrowIds || !returnDate || !Array.isArray(borrowIds)) {
-            return res.status(400).send("Invalid request. Please provide sufficent data.");
+            const cartBooks = await BorrowHistory.find({ userId: userId, status: "cart" }).populate('bookId');
+            return res.render('checkoutBook', { cartBooks, message: "Invalid request. Please provide sufficent data." });
         }
 
         // Find the borrowed books and update their status to "borrowed"

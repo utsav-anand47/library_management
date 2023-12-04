@@ -1,75 +1,68 @@
 <%- include('partials/header') %>
-    <img class="backgroundImg" src="https://d4804za1f1gw.cloudfront.net/wp-content/uploads/sites/50/2018/11/hero.jpg"
-        alt="img">
-    <div class="box">
-        <center>
-            <h2>Enter User Informations</h2>
-        </center>
+    <div class="loginBackgroundImg"></div>
+    <div class="innerMain">
+        <div class="box">
+            <center>
+                <h2>Enter User Informations</h2>
+            </center>
 
-        <form action="/signup" method="POST" id="form">
-            <div class="firstname">
-                <label for="firstname">First Name</label><br />
-                <input type="text" name="fname" class="firstname" id="firstname" required placeholder="Type first name here" />
-                <small></small>
-            </div>
-
-            <div class="lastname">
-                <label for="lastname">Last Name</label><br />
-                <input type="text" name="lname" class="lastname" id="lastname" required placeholder="Type last name here" />
-                <small></small>
-            </div>
-
-            <div class="contact">
-                <label for="contact">Contact Number</label><br />
-                <input type="number" name="contactNumber" class="contact" id="contact" required placeholder="Type number here" />
-
-                <small id="contact-error"></small>
-
-            </div>
-
-            <div class="address">
-                <label for="adress">Address</label><br />
-                <textarea name="address" class="address" id="address" required placeholder="Type user Address here"></textarea>
-                <div id="address-error"></div>
-                <small></small>
-            </div>
-
-            <div class="email">
-                <label for="email">Email Address</label><br />
-                <input type="email" name="email" class="email" id="email" required placeholder="Type email address here" />
-                <small></small>
-            </div>
-
-
-
-            <div class="password">
-                <label for="email">Password</label><br />
-                <input type="password" name="password" class="email" required id="password" placeholder=" password" />
-                <small></small>
-            </div>
-            <!-- <div class="type">
-                <label for="type" id="test">User Type</label><br />
-                <div class="radio" class="type" id="type">
-                    <div class="radio-block">
-                        <input type="radio" name="type" id="radio-school" value="school" />
-                        <label for="school" class="radiotext">ADMIN</label>
-                    </div>
-
-                    <div class="radio-block">
-                        <input type="radio" name="type" id="radio-employee" value="employee" />
-                        <label for="employee" class="radiotext">USER</label>
-                    </div>
+            <form action="/signup" method="POST" id="form">
+                <div class="firstname">
+                    <label for="firstname">First Name</label><br />
+                    <input type="text" name="fname" class="firstname" id="firstname" required
+                        placeholder="Type first name here" />
+                    <small></small>
                 </div>
-                <small id="type-error"></small>
-            </div> -->
-            <p class="text-danger" style="color: red;font-size: 1.5rem;">
-                <%= message %>
-            </p>
-            <div class="submit">
-                <input type="reset" value="Reset">
-                <input type="submit" class="button"></input>
-            </div>
-        </form>
-    </div>
 
+                <div class="lastname">
+                    <label for="lastname">Last Name</label><br />
+                    <input type="text" name="lname" class="lastname" id="lastname" required
+                        placeholder="Type last name here" />
+                    <small></small>
+                </div>
+
+                <div class="email">
+                    <label for="email">Email Address</label><br />
+                    <input type="email" name="email" class="email" id="email" required
+                        placeholder="Type email address here" />
+                    <small></small>
+                </div>
+
+                <div class="password">
+                    <label for="email">Password</label><br />
+                    <input type="password" name="password" class="email" required id="password"
+                        placeholder=" password" />
+                    <small></small>
+                </div>
+
+                <div class="contact">
+                    <label for="contact">Contact Number</label><br />
+                    <input type="number" name="contactNumber" class="contact" id="contact" required
+                        placeholder="Type number here" />
+
+                    <small id="contact-error"></small>
+
+                </div>
+
+                <div class="address">
+                    <label for="adress">Address</label><br />
+                    <textarea name="address" class="address" id="address" required
+                        placeholder="Type user Address here"></textarea>
+                    <div id="address-error"></div>
+                    <small></small>
+                </div>
+
+                <div class="submit">
+                    <input type="reset" value="Reset">
+                </div>
+
+                <div class="submit">
+                    <input type="submit" class="button"></input>
+                </div>
+                <p class="text-danger" style="color: red;font-size: 1.5rem;">
+                    <%= message %>
+                </p>
+            </form>
+        </div>
+    </div>
     <%- include('partials/footer') %>

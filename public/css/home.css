@@ -1,4 +1,4 @@
-/*****************HOMEPAGE********************/
+/*****************NAVBAR(header.ejs)********************/
 
 .navBar {
   /* top: 0; */
@@ -36,31 +36,52 @@
 }
 
 .navButtons button:hover {
-  background: #1c3266;
+  /* background: #1c3266; */
+  background: #0069d9;
 }
+
+
+.nav-link {
+  border-bottom: 1px solid #4b4b4b;
+  color: black;
+}
+
+.nav-link:hover {
+  background: #0069d9;
+  border-radius: 4px;
+  color: black;
+}
+
+.nav-item>.nav-link {
+  color: white !important;
+}
+
+/*****************HOME(home.ejs)********************/
 
 .backgroundImg {
   position: absolute;
   z-index: -10;
-  /*put image behind everything*/
-  height: 100%;
+  height: calc(100vh - 75px);
   width: 100%;
-  opacity: 0.5;
+  background-image: radial-gradient(rgba(0, 0, 0, 0.01),
+      rgba(0, 0, 0, 0.55)), url('/assets/libary_bg.jpg');
+  filter: blur(3px);
+  background-position: center;
+  /* background-size: cover; */
 }
 
-.welcomeDiv {
-  padding-top: 150px;
-  text-align: center;
+.innerDiv {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100%;
 }
 
 .welcomeMsg {
-  font-size: 40px;
-  text-decoration: underline;
-}
-
-.userType {
-  margin-top: 80px;
-  font-size: 30px;
+  font-size: 3.5rem;
+  color: white;
+  font-weight: 500;
+  text-align: center;
 }
 
 .selection {
@@ -69,74 +90,6 @@
   justify-content: space-evenly;
   margin: 10px 50px 50px 50px;
   padding: 20px;
-}
-
-.admin {
-  padding: 10px 0px;
-}
-
-.admin button {
-  background: rgb(215, 44, 215);
-  padding: 15px 20px;
-  font-size: 25px;
-}
-
-.admin button:hover {
-  background: #5f015f;
-}
-
-.librarian {
-  padding: 10px 0px;
-}
-
-.librarian button {
-  background: orange;
-  padding: 15px 20px;
-  font-size: 25px;
-}
-
-.librarian button:hover {
-  background: #cf8702;
-}
-
-.borrower {
-  padding: 10px 0px;
-}
-
-.borrower button {
-  background: salmon;
-  padding: 15px 20px;
-  font-size: 25px;
-}
-
-.borrower button:hover {
-  background: #d65142;
-}
-
-/**********************LOGIN*************************/
-
-.login_main {
-  width: 50%;
-  margin: 150px auto 0px auto;
-}
-
-.login_form {
-  text-align: center;
-}
-
-.login_form h1 {
-  font-size: 40px;
-}
-
-.login_form input {
-  margin: 5px 0px;
-}
-
-.login_form button {
-  margin: 5px 0px;
-  width: 100%;
-  padding: 10px;
-  font-size: 18px;
 }
 
 
@@ -249,15 +202,7 @@
   height: 100%;
 }
 
-.nav-link {
-  border-bottom: 1px solid #4b4b4b;
-  color: white;
-}
 
-.nav-link:hover {
-  background: black;
-  color: white;
-}
 
 .adminDashGreeting_right {
   flex-grow: 1;

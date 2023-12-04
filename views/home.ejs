@@ -1,30 +1,23 @@
 <%- include('partials/header') %>
 
-    <img class="backgroundImg" src="https://d4804za1f1gw.cloudfront.net/wp-content/uploads/sites/50/2018/11/hero.jpg"
-        alt="img">
+    <div class="backgroundImg"> </div>
+    <div class="innerMain">
+        <div class="welcomeDiv">
+            <div class="welcomeMsg">
+                Welcome to the Book Heaven
+            </div>
 
-    <div class="welcomeDiv">
-        <div class="welcomeMsg">
-            Welcome to the Book Heaven
-        </div>
-        <!-- <div class="userType">
-            Which type of user are you?
-        </div> -->
-    </div>
-    <h3 class="text-center" id="auth-icon-text"></h3>
+            <h3 class="text-center" id="auth-icon-text"></h3>
 
-    <div class="selection">
-        <div class="admin">
-            <a href="/books">
-                <button>See Available Books</button>
-            </a>
-        </div>
+            <div class="selection">
+                <a href="/books">
+                    <button class="btn btn-secondry btn-big">See Available Books</button>
+                </a>
 
-        <div class="borrower">
-            <a href="/login" id="home-auth-link">
-                <button id="home-auth-text">Role Based Login</button>
-            </a>
+                <a href="/login" id="home-auth-link">
+                    <button class="btn btn-primary btn-big" id="home-auth-text">Role Based Login</button>
+                </a>
+            </div>
         </div>
     </div>
-
     <%- include('partials/footer') %>

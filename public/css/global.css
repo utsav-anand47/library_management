@@ -2,10 +2,30 @@
 
 html,
 body {
-  height: 80vh;
   margin: 0;
   padding: 0;
   font-family: "Roboto", sans-serif;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  --blue: #054b8d;
+  --btn-color-1: #0d1831;
+}
+
+main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  /* justify-content: center; */
+  align-items: center;
+}
+
+.innerMain {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 * {
@@ -18,18 +38,25 @@ p {
   margin-bottom: 0.2rem;
 }
 
-button {
+.btn-secondry {
   background: #0d1831;
   border: 1px solid #0d1831;
   border-radius: 3px;
   color: #ffffff;
-  padding: 5px 10px;
-  font-size: 15px;
   cursor: pointer;
 }
 
-button:hover {
-  background: #1c3266;
+.btn-secondry:hover {
+  background: #162852;
+  border: 1px solid #0d1831;
+  border-radius: 3px;
+  color: #ffffff;
+  cursor: pointer;
+}
+
+.btn-big {
+  padding: 1rem 2rem;
+  font-size: 1.2rem;
 }
 
 input,

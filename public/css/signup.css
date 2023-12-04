@@ -1,45 +1,22 @@
-/* ================================================= */
-
-
-/*                 Main Style                       */
-
-
-/* ================================================= */
-
-* {
-    padding: 0;
-    margin: 0;
-    box-sizing: border-box;
-    font-family: "Open Sans", sans-serif;
-}
-
-
-/* ================================================= */
-
-
-/*             Style the Content                     */
-
-
-/* ================================================= */
-
-body {
-    /* background: rgb(164, 0, 230); */
-    background: linear-gradient( 90deg, rgba(164, 0, 230, 1) 0%, rgba(255, 59, 59, 1) 100%);
-}
-
 .box {
     /*background-color: #eff0f4; */
     /* background-color: rgb(220, 171, 253); */
-    width: 70%;
-    margin: 30px auto;
-    padding: 20px;
+    width: 100%;
+    /* margin: 30px auto;
+    padding: 20px; */
     border-radius: 0.5rem;
     border: rgb(255, 255, 255) solid 3px;
-    box-shadow: 5px 5px 10px #888888;
+    /* background-color: #eff0f4; */
+    background-color: rgb(220, 171, 253);
+    /* margin: 100px auto;*/
+    padding: 1rem 1.5rem;
+    border-radius: 1.5rem;
+    /* border: rgb(255, 255, 255) solid 3px; */
+    /* box-shadow: 5px 5px 0px #888888; */
 }
 
 .box h2 {
-    font-family: "Open Sans", sans-serif;
+    /* font-family: "Open Sans", sans-serif; */
     font-weight: bold;
     margin: 10px auto 20px auto;
 }
@@ -48,8 +25,8 @@ body {
     display: grid;
     margin: 10px;
     grid-template-columns: 1fr 1fr;
-    grid-template-rows: 1fr 1fr 1fr 1.5fr 0.01fr;
-    grid-template-areas: "firstname email" "lastname type" "contact payment" "address empty" "submit submit";
+    /* grid-template-rows: 1fr 1fr 1fr 1.5fr 0.01fr; */
+    /* grid-template-areas: "firstname email" "lastname type" "contact payment" "address empty" "submit submit"; */
     grid-gap: 15px;
 }
 
@@ -95,7 +72,7 @@ body {
 
 .box .submit .button {
     background: rgb(164, 0, 230);
-    background: linear-gradient( 90deg, rgba(164, 0, 230, 1) 0%, rgba(255, 59, 59, 1) 100%);
+    background: linear-gradient(90deg, rgba(164, 0, 230, 1) 0%, rgba(255, 59, 59, 1) 100%);
     color: white;
     font-size: 10pt;
     border: none;
@@ -114,7 +91,7 @@ body {
 
 /* ================================================= */
 
-.firstname {
+/* .firstname {
     grid-area: firstname;
 }
 
@@ -146,7 +123,7 @@ body {
     grid-area: submit;
     justify-content: center;
     display: flex;
-}
+} */
 
 
 /* ================================================= */
@@ -179,6 +156,7 @@ body {
     .box form {
         grid-template-rows: 1fr 1fr 1fr 1fr 0.01fr;
     }
+
     .box form .radio {
         -webkit-box-orient: vertical;
         -webkit-box-direction: normal;
@@ -191,6 +169,7 @@ body {
     .box form {
         grid-template-rows: 1fr 1fr 1fr 1fr 0.01fr;
     }
+
     .box form .radio {
         display: -webkit-box;
         display: -ms-flexbox;
@@ -199,6 +178,7 @@ body {
         justify-content: space-around;
         width: 80%;
     }
+
     .box form .radio .radio-block {
         font-size: 19px;
         display: block;
@@ -219,6 +199,7 @@ body {
         grid-template-rows: 1fr 1fr 1fr 1.5fr 1fr 1fr 1fr 0.01fr;
         grid-template-areas: "firstname" "lastname" "contact" "address" "email" "type" "payment" "submit";
     }
+
     .box form .radio {
         width: 100%;
     }
@@ -228,14 +209,4 @@ body {
     .box form {
         width: 100%;
     }
-}
-.box {
-    /* background-color: #eff0f4; */
-    background-color: rgb(220, 171, 253);
-    width: 50%;
-    margin: 100px auto;
-    padding: 40px;
-    border-radius: 1.5rem;
-    /* border: rgb(255, 255, 255) solid 3px; */
-    box-shadow: 5px 5px 10px #888888;
 }
