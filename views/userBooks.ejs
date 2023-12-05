@@ -1,5 +1,5 @@
 <%- include('partials/header') %>
-    <%- include('partials/adminNav') %>
+    <%- include('partials/userNav') %>
 
         <div class="table_container table-responsive" style="padding: 110px 93px;">
             <h2 class="text-center">Available Books</h2>
@@ -34,20 +34,20 @@
                                         <p class="card-text">
                                             Available Copies : <%= book.availableCopies %>
                                         </p>
-                                        <p class="card-text">
-                                            Total Copies : <%= book.totalCopies %>
-                                        </p>
-                                        <div
-                                            class="d-flex flex-column justify-content-center align-items-center my-2 gap-2">
-                                            <form action="/admin/delete-book/<%= book._id  %>" method="post">
-                                                <input type="hidden" name="bookId" value="<%= book._id %>">
-                                                <button type="submit" class="btn btn-danger my-2">Remove
-                                                    Book</button>
-                                            </form>
-                                            <form action="/admin/edit-book/<%= book._id  %>" method="get">
-                                                <input type="hidden" name="bookId" value="<%= book._id %>">
-                                                <button type="submit" class="btn btn-primary">Edit the details</button>
-                                            </form>
+                                        <div class="d-flex justify-content-center align-items-center">
+                                            <% if(book.isInCart){ %>
+                                                <form action="/user/removefromcart" method="post">
+                                                    <input type="hidden" name="bookId" value="<%= book._id %>">
+                                                    <button class="btn btn-secondry" type="submit"><strong>Remove
+                                                            from cart</strong></button>
+                                                </form>
+                                                <% } else { %>
+                                                    <form action="/user/addtocart" method="post">
+                                                        <input type="hidden" name="bookId" value="<%= book._id %>">
+                                                        <button class="btn btn-primary" type="submit"><strong>Add to
+                                                                cart</strong></button>
+                                                    </form>
+                                                    <% } %>
                                         </div>
                                     </div>
                                 </div>

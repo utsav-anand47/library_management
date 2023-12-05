@@ -12,10 +12,12 @@
     if (role === "ADMIN") {
       document.getElementById("auth-icon-text").innerText = "Hello Admin, " + name;
       document.getElementById("home-auth-link").href = "/admin/dashboard";
+      document.getElementById("home-book-link").href = "/admin/books";
       document.getElementById("home-auth-text").innerText = "Go To Admin Dashboard";
     } else if (role === "USER") {
       document.getElementById("auth-icon-text").innerText = "Hello User, " + name;
       document.getElementById("home-auth-link").href = "/user/dashboard";
+      document.getElementById("home-book-link").href = "/user/books";
       document.getElementById("home-auth-text").innerText = "Go To User Dashboard";
     } else {
       document.getElementById("auth-icon-text").innerText = "";

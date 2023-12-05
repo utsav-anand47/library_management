@@ -66,6 +66,35 @@ route.get('/dashboard', async (req, res) => {
     }
 });
 
+route.get('/books', async (req, res) => {
+    const userId = req.user.id;
+    try {
+        const books = await Book.find();
+        const takenBooks = await BorrowHistory.find({ userId, status: "cart" }).select("bookId");
+
+        const allUserTakenBooksId = takenBooks.map(obj => obj.bookId.toString());
+        const newBookData = books.map(book => {
+            let isInCart = false;
+            if (allUserTakenBooksId.includes(book._id.toString())) {
+                isInCart = true;
+            }
+            return {
+                _id: book._id,
+                title: book.title,
+                author: book.author,
+                imgUrl: book.imgUrl,
+                bookNumber: book.bookNumber,
+                availableCopies: book.availableCopies,
+                genre: book.genre,
+                isInCart
+            };
+        });
+        res.render('userBooks', { books: newBookData });
+    } catch (error) {
+        res.status(404).send(error.message)
+    }
+})
+
 route.post('/addtocart', async (req, res) => {
     const { bookId } = req.body;
     const userId = req.user?.id
@@ -82,7 +111,29 @@ route.post('/addtocart', async (req, res) => {
             bookId
         });
 
-        res.redirect('/books');
+        res.redirect('/user/books');
+    } catch (error) {
+        console.error(error);
+        res.status(500).send("Internal Server Error");
+    }
+});
+
+route.post('/removefromcart', async (req, res) => {
+    const { bookId } = req.body;
+    const userId = req.user?.id
+
+
+    try {
+        if (!userId || !bookId) {
+            return res.status(400).send("Please provide all data.");
+        }
+
+        await BorrowHistory.findOneAndDelete({
+            userId,
+            bookId
+        });
+
+        res.redirect('/user/books');
     } catch (error) {
         console.error(error);
         res.status(500).send("Internal Server Error");

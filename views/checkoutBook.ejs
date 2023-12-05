@@ -42,16 +42,16 @@
                         <b>Return date</b>
                         <input type="date" name="" id="returnDate">
                     </div>
-                    <p class="text-danger" id="error-msg"></p>
-                    <p class="text-danger">
+                    <p class="text-danger text-center" id="error-msg"></p>
+                    <p class="text-danger text-center">
                         <%= message %>
                     </p>
                     <div class="submit_bttns">
                         <a href="/user/dashboard">
-                            <button class="cancel">Cancel</button>
+                            <button class="cancel btn btn-danger">Cancel</button>
                         </a>
 
-                        <button id="checkoutButton" class="checkout">Checkout Books</button>
+                        <button id="checkoutButton" class="checkout btn btn-primary">Checkout Books</button>
 
                     </div>
                     <% } %>
@@ -67,22 +67,28 @@
                     selectedBookIds.push(element.value);
                 });
                 const returnDate = document.getElementById('returnDate').value;
-
+                if (selectedBookIds.length === 0) {
+                    document.getElementById("error-msg").innerHTML = "Please chose book.";
+                    return;
+                }
+                if (!returnDate) {
+                    document.getElementById("error-msg").innerHTML = "Please chose return date.";
+                    return;
+                }
                 // Send selected book IDs to the server
                 fetch('/user/checkout-books', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
-                        // other headers if needed
                     },
                     body: JSON.stringify({
                         borrowIds: selectedBookIds,
                         returnDate: returnDate,
-                    }), // Convert the object to a JSON string
+                    }),
                 })
                     .then(response => {
                         response.json();
-                        // window.location.reload();
+                        window.location.reload();
                     })
                     .catch(error => {
                         console.error(error);

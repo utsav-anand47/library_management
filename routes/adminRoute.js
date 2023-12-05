@@ -181,6 +181,24 @@ route.post('/edit-book/:id', upload.single('img'), async (req, res) => {
     }
 });
 
+route.post('/delete-book/:id', async (req, res) => {
+    const bookId = req.params.id;
+
+    console.log(bookId);
+    try {
+        // Check if the book exists
+        const existingBook = await Book.findByIdAndDelete(bookId);
+        if (!existingBook) {
+            return res.status(404).send("Book not found");
+        }
+
+        res.redirect('/admin/books');
+    } catch (error) {
+        console.error(error);
+        res.status(500).send("Internal Server Error");
+    }
+});
+
 
 
 module.exports = route
